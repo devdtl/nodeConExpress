@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <title>Actualizar</title>
+</head>
+
+<body>
+      {{>header}}
+<br><br><br>
+    <div class="columns" style="padding: 20px;">
+        <div class="column">  </div>
+        <div class="column">
+
+  <form class="box" action="/update" method="POST">
+     <h1 class="title is-3">Actualizar {{note.title}}</h1>
+  <div class="field">
+
+    <label class="label">Title</label>
+    <div class="control">
+      
+      <input class="input" name="updateTitle" type="text"  value="{{note.title}}" >
+    
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">body</label>
+    <div class="control">
+      <input class="input" name="updateBody" type="text" value="{{note.body}}" >
+    </div>
+  </div>
+  
+
+  <input class="button is-success" type="submit" value="Actualizar">
+    <button class="button is-danger" href="/index" >Cancelar</button>
+ 
+</form>    </div>
+            <div class="column"></div>
+            </div>
+<br><br><br><br><br><br><br>
+  {{>footer}}
+</body>
+
+</html>
