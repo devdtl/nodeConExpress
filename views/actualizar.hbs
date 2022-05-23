@@ -17,9 +17,9 @@
         <div class="column">
 
   <form class="box" action="/update" method="POST">
-     <h1 class="title is-3">Actualizar {{note.title}}</h1>
+     <h1 class="title is-3">Actualizar </h1>
   <div class="field">
-
+<input type="hidden" name="id" value="{{note.id}}" id="">
     <label class="label">Title</label>
     <div class="control">
       
@@ -41,7 +41,7 @@
 </form>    </div>
             <div class="column"></div>
             </div>
-<br><br><br><br><br><br><br>
+<br><br><br><br><br>
   {{>footer}}
 </body>
 

@@ -52,18 +52,18 @@ app.get("/list_notes", (request, response) => {
   console.log(notes1);
   response.render("lista", { notes1 });
 });
-app.get("/delete/:title", (request, response) => {
-  const titledelete = request.params.title;
+app.get("/delete/:id", (request, response) => {
+  const id = request.params.id;
   const notes = tools.loadNotes();
-  const notesToKeep = notes.filter((note) => note.title != titledelete);
-    tools.saveNotes(notesToKeep);
-  response.redirect("/list_notes",titledelete, "BORRADO");
+  const notesToKeep = notes.filter((note) => note.id != id);
+  tools.saveNotes(notesToKeep);
+  response.redirect("/list_notes");
   /*
   let notes = tools.loadNotes();
   notes = notes.filter((note) => note.title !== titledelete);
  
   response.status(204).end();*/
-  response.send("recivido homs");
+  response.send("recibido homs");
 });
 
 app.get("/agregar", (request, response) => {
@@ -72,22 +72,33 @@ app.get("/agregar", (request, response) => {
 
 app.post("/agregarNota", (request, response) => {
   console.log("funcion para crear nota post");
-  tools.addNote(request.body.title, request.body.bodyr);
+  const maxId = notes.length > 0 ? Math.max(...notes.map((n) => n.id)) : 0;
+  const note = request.body;
+  note.id = maxId + 1;
+  console.log("este es ", note.id);
+  tools.addNote(note.id, request.body.title, request.body.bodyr);
   response.redirect("/list_notes");
 });
 
-app.get("/actualizar/:title", (request, response) => {
-  let titulo = request.params.title;
-  const notes = tools.loadNotes();
-  const note = notes.find((note) => note.title === titulo);
+app.get("/actualizar/:id", (request, response) => {
+  let id = Number(request.params.id);
 
+  console.log(id);
+  const notes = tools.loadNotes();
+
+  const note = notes.find((note) => note.id === id);
   response.render("actualizar", { note });
 });
 
 app.post("/update", (request, response) => {
+  let id = String(request.body.id);
   let titulo = request.body.updateTitle;
   let cuerpo = request.body.updateBody;
-  tools.updateNote(titulo, titulo, cuerpo);
+  console.log("este es ", id);
+  console.log("este es ", titulo);
+  console.log("este es ", cuerpo);
+
+  tools.updateNote(id, titulo, cuerpo);
   response.redirect("/list_notes");
 });
 

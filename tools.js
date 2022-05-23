@@ -1,22 +1,37 @@
 const { redirect } = require("express/lib/response");
 const fs = require("fs"); //importamos fs para escribir y leer archivos
 const { request } = require("http");
+const { stringify } = require("querystring");
 
-const addNote = function (title, body) {
+const addNote = function (id,title, body) {
   //creacion de addNote para formar la estructura del archivo
+
+ console.log("El id de la nota", id);
   console.log("El título de la nota", title);
   console.log("El cuerpo de la nota", body);
   const notes = loadNotes();
-  const duplicateNote = notes.find((note) => note.title === title); //si la nota está duplicada se muestra una bandera
+  const duplicateNote = notes.find((note) => note.id === id); //si la nota está duplicada se muestra una bandera
   if (!duplicateNote) {
     notes.push(
       //agregamos los valores que recibe yargs
-      { title: title, body: body }
+      { id: id, title: title, body: body }
     );
     saveNotes(notes); //validación si existe o no una nota con el mismo titulo
     console.log("Notas creadas");
   } else {
     console.log("Nota duplicada");
+    const maxId = notes.length > 0 ? Math.max(...notes.map((n) => n.id)) : 0;
+
+    id= maxId+1;
+    console.log("ultimo id",id);
+    id2= String(id);
+    console.log(typeof id2);
+    notes.push(
+    
+      //agregamos los valores que recibe yargs
+      { id: id, title: title, body: body }
+    );
+    saveNotes(notes); //validación si existe o no una nota con el mismo titulo
   }
 };
 const saveNotes = function (notes) {
@@ -24,7 +39,7 @@ const saveNotes = function (notes) {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync("notes.json", dataJSON); //agrega la nota en el documento en formato Json
 };
-const loadNotes = function () {
+  const loadNotes = function () {
   try {
     const dataBuffer = fs.readFileSync("notes.json"); //obtiene el archivo de notas
     const dataJSON = dataBuffer.toString(); //lo muestra como cadena
@@ -33,7 +48,7 @@ const loadNotes = function () {
     return []; //devuelve lista vacía
   }
 };
-const listNotes = function () {
+  const listNotes = function () {
   const notes = loadNotes();
 
   notes.forEach((note) => {
@@ -45,7 +60,7 @@ const listNotes = function () {
     );
   });
 };
-const removeNote = function (title) {
+  const removeNote = function (title) {
   const notes = loadNotes();
   const notesToKeep = notes.filter((note) => note.title != title);
 
@@ -65,12 +80,19 @@ const readOneNote = function (title) {
     
 };
 
-const updateNote = function (title, updateTitle, updateBody) {
+const updateNote = function (id, updateTitle, updateBody) {
   const notes = loadNotes();
-  const note = notes.findIndex((note) => note.title === title);
-  notes.splice(note, 1, {title: updateTitle, body: updateBody, });
+  console.log("el id llegando",id);
+  let ids= Number(id)
+  console.log("el id despues de maquillado",ids);
+  let note = notes.findIndex((note) =>note.id === ids);
+  console.log("holi",note);
+  newnote =
+  notes.splice(note, 1, {id:ids, title: updateTitle, body: updateBody});
+  console.log("esto que es_ ",notes);
   saveNotes(notes);
   console.log("Nota modificada");
+
 };
 
 module.exports = {
