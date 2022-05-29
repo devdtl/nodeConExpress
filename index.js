@@ -52,18 +52,17 @@ app.get("/list_notes", (request, response) => {
   console.log(notes1);
   response.render("lista", { notes1 });
 });
-app.get("/delete/:id", (request, response) => {
-  const id = request.params.id;
-  const notes = tools.loadNotes();
-  const notesToKeep = notes.filter((note) => note.id != id);
-  tools.saveNotes(notesToKeep);
-  response.redirect("/list_notes");
+app.get("/delete/:id", (request, response) => { 
+  const id = request.params.id; 
+  tools.removeNote(id)
+  response.redirect("/list_notes"); 
+
   /*
   let notes = tools.loadNotes();
   notes = notes.filter((note) => note.title !== titledelete);
  
-  response.status(204).end();*/
-  response.send("recibido homs");
+  response.status(204).end();
+  response.send("recibido homs");*/
 });
 
 app.get("/agregar", (request, response) => {

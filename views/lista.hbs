@@ -1,53 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+  .titulos{
+    color:  #1e3799;
+    text-decoration: solid;
+      text-align: center;
+  }
+  table{
+    text-align: center;
+  }
+  table thead tr th{
+     text-align: center;
+  }
+</style>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-    <title>Lista</title>
+  <title>Lista</title>
 </head>
+
 <body>
-    {{>header}}
-    <div class="columns" style="padding: 20px; margin-left:90px">
+  {{>header}}
+  <div class="columns">
+    <div class="column is-3">  <h1 class="title is-3" style="color:#006266; padding:20px;    ">Lista de Notas</h1>
+ </div>
+  <div class="column is-6">
+      
+      <div class="card" style="    margin-left: -58px;">
+        <div class="card-content" >
+          <div class="content"><p style="text-align:justify; font-size:large; font-weight:bold; color:#e58e26; ">
+            A continuación se presenta la tabla con la lista de notas agregadas hasta el momento, brindando la opcion de actualizar y eliminar cada una de ellas</p>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      
+<div class="columns" style="    margin-left: 4%; margin-right: 30%; border:1px solid #f6e58d; ">
 
+ <br> <br>
 
-<br>
-     <table class="table is-striped">
-  <thead>
-    <tr>
-       <th><abbr title="Position">ID</abbr></th>
+  <table class="table is-bordered is-striped is-narrow is-fullwidth mt-4">
+    <thead>
+      <tr style="background-color:#f6e58d; text-align:center" >
+        <th style="text-align:center;"><span class="titulos" title="Name">ID</span></th>
+        <th style="text-align:center;"> <span class="titulos" title="City">Titulo </span></th>
+        <th style="text-align:center;"> <span class="titulos" title="DOB">Cuerpo</span></th>
+        <th style="text-align:center;"> <span class="titulos" title="Name">Acciones</span></th>
+      </tr>
+    </thead>
+    <tbody>
 
-      <th><abbr title="Position">Title</abbr></th>
-      <th>Body</th>
-      <th><abbr title="Won">Actions</abbr></th>
-    </tr>
-  </thead>
-
-  <tbody>
-        
-     <br />
-     {{# each notes1}}
-    <tr>
-      <td> {{id}}</td>
-      <td> {{title}}</td>
-      <td>{{body}}</td>&nbsp;
-       <td>
-          <a  href="/actualizar/{{id}}" ><img src="https://cdn-icons-png.flaticon.com/512/32/32355.png" title="Editar" alt="Editar" width="10px"></a> &nbsp;
-          <a href="/delete/{{id}}">  <img src="https://e7.pngegg.com/pngimages/36/528/png-clipart-computer-icons-button-wiki-delete-button-angle-rectangle.png" title="Borrar" alt="Borrar" width="10px">
-       </td></a>
+       {{# each notes1}}
+      <tr>
     
-    </tr>
-   {{/each}}
-  </tbody>
-</table>
+        <td> {{id}}</td>
+        <td> {{title}}</td>
+        <td> {{body}}</td>
+        <td>
+          <a class="button is-primary is-outlined " href="/actualizar/{{id}}">
+          <span class="icon is-small">
+            <i class="fa fa-edit"></i>
+            </span><span>Editar</span></a> 
+            <a class="button is-danger is-outlined" href="/delete/{{id}}">
+            <span class="icon is-small">
+              <i class="fa fa-trash"></i> 
+              </span><span>Borrar</span></a></td>
+      </tr>
+           {{/each}}
+    </tbody>
+  </table>
 
 </div>
 
 
-<br><br><br><br><br><br>  
-<br><br><br><br><br><br>  
-{{>footer}}
+ <br> <br> <br> <br>
+
+  {{>footer}}
 </body>
+
+
 </html>

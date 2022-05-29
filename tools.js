@@ -3,7 +3,9 @@ const fs = require("fs"); //importamos fs para escribir y leer archivos
 const { request } = require("http");
 const { stringify } = require("querystring");
 
-const addNote = function (id,title, body) {
+
+
+const addNote = function (title, body) {
   //creacion de addNote para formar la estructura del archivo
 
  console.log("El id de la nota", id);
@@ -60,16 +62,12 @@ const saveNotes = function (notes) {
     );
   });
 };
-  const removeNote = function (title) {
+  const removeNote = function (id) {
   const notes = loadNotes();
-  const notesToKeep = notes.filter((note) => note.title != title);
+  const notesToKeep = notes.filter((note) => note.id != id);
 
-  if (notes.lenght > notesToKeep.lenght) {
-    console.log("Note Remooved!!");
     saveNotes(notesToKeep);
-  } else {
-    console.log("Nota no Eliminada");
-  }
+
 };
 
 

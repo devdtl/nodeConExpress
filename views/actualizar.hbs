@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+  <style>
+    #formulario{
+      background-image: url("https://i.pinimg.com/originals/48/6e/78/486e7896b1a2c03ed8b04ff3cf26b056.jpg");
+    }
+  </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,37 +17,48 @@
 
 <body>
       {{>header}}
-<br><br><br>
+<br>
     <div class="columns" style="padding: 20px;">
-        <div class="column">  </div>
-        <div class="column">
-
-  <form class="box" action="/update" method="POST">
-     <h1 class="title is-3">Actualizar </h1>
+          <div class="column is-6">
+      <h1 class="title is-3" style="color:#006266;">Actualizar una nota</h1>
+      <div class="card">
+        <div class="card-content">
+          <div class="content">
+            <p style="text-align:justify; font-size:large; font-weight:bold; color:#e58e26;">
+              A continuación se presenta un formulario para actualizar la información que conforma la nota, tomando en
+              cuenta el titulo y el cuerpo del titulo ya ingresados con anterioridad, para posteriormente enviarlos a la lista de notas por medio del
+              metodo POST y el indicador "Id" como guia del elemento a modificar obtenido de las practicas escolares en la clase de clases web de la maestria en sistemas
+              computacionales </p>
+          </div>
+        </div>
+      </div>
+    </div>
+        <div class="column is-6">  
+       
+  <form class="box" action="/update" method="post" style="background-image: url('https://i.pinimg.com/736x/68/34/20/683420098faac1e27a55280c6fead466.jpg')">
+  <input type="hidden" name="id" value="{{note.id}}" id="">
+     <h1 class="title is-3" style="color: #1e3799; margin-left: 86px;">Actualizar Nota<i class="fa-solid fa-thumbtack" style="color:#ffa502"></i></h1>
   <div class="field">
-<input type="hidden" name="id" value="{{note.id}}" id="">
-    <label class="label">Title</label>
+    <label class="label" style="color: #1e3799; background-color:transparent;">Titulo</label>
     <div class="control">
-      
-      <input class="input" name="updateTitle" type="text"  value="{{note.title}}" >
-    
+      <input class="input" name="updateTitle"   value="{{note.title}}"  type="text" style=" font-weight:bold; color:#e58e26; margin-left: -21px; background-image: url('https://i.pinimg.com/736x/68/34/20/683420098faac1e27a55280c6fead466.jpg') " width="20px" >
     </div>
   </div>
   <div class="field">
-    <label class="label">body</label>
+    <label class="label" style="color: #1e3799;">Cuerpo</label>
     <div class="control">
-      <input class="input" name="updateBody" type="text" value="{{note.body}}" >
+      <input class="input" name="updateBody"  value="{{note.body}}" type="text"  style=" font-weight:bold; color:#e58e26; margin-left: -21px; background-image: url('https://i.pinimg.com/736x/68/34/20/683420098faac1e27a55280c6fead466.jpg') " width="20px" >
     </div>
   </div>
   
 
-  <input class="button is-success" type="submit" value="Actualizar">
+  <input class="button is-primary" type="submit" value="Actualizar">
     <button class="button is-danger" href="/index" >Cancelar</button>
- 
+
 </form>    </div>
             <div class="column"></div>
             </div>
-<br><br><br><br><br>
+<br><br>
   {{>footer}}
 </body>
 
